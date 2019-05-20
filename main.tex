@@ -271,9 +271,17 @@ When asked for running time of an algorithm this refers to $O(\cdot)$. Runtime t
 False: Merge sort is not always faster than insertion sort. In the \textbf{Best Case} Merge Sort's running time is $O(n\log(n)$ and Insertion Sort is linear $O(n)$. For \textbf{Average Case} and \textbf{Worst Case} Merge Sort is faster. 
 \subsection{Insertion Sort vs Merge Sort}
 \begin{example}
-Suppose the input sequence is already sorted.  For this specific input, what is the running time of Insertion-sort and Merge-sort?  Assume that they are implemented as in the textbook.
+Suppose the input sequence is already sorted.  For this specific input, what is the running time of Insertion-sort and Merge-sort?. Consider \textit{listing 1.1 and 1.2}
 \end{example}
-\textbf{Solution:} For insertion sort the running time is $\Theta(n)$, for merge sort it is $\Theta(n\log(n))$. Insertion has to iterate through the entire array, the outer loop runs, but not the inner loop. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=100mm]{Pictures/SortedInsertion.pdf}
+\end{figure}
+\textbf{Solution:} For insertion sort the running time is $\Theta(n)$, for merge sort it is $\Theta(n\log(n))$.
+\begin{itemize}
+    \item \textit{Insertion Sort} must iterate through the entire array.
+    \item The while loop (\textbf{Lines 6-8}) of Insertion Sort (\textit{Listing 1.1} ) does not execute.
+\end{itemize}
 \subsection{Running Time}
 \begin{example}
 Suppose there are $2^n$ inputs to a certain problem. The running time of an algorithm A is exactly $2^n$ for exactly one of the inputs, and 1 for any other input. Then the running time is O(1) since $2^n \cdot \frac{1}{2^n} + 1\cdot(1 - \frac{1}{2^n}) \leq 2$. Is this statement correct?
@@ -286,15 +294,15 @@ False: The statement is in correct. O notation refers to worst case running time
  The following is a pseudo-code of Selection-Sort.  Describe Selection-Sort in plain English.
 \end{example}
 \textbf{Solution:} 
- \begin{lstlisting}
-    n = A.length 
-    for j = 1 to n - 1 
-        smallest = j 
-        for i = j + 1 to n 
-            if A[i] < A[smallest] 
-                smallest = i 
-        exchange A[j] with A[smallest]
-    \end{lstlisting} 
+ \begin{lstlisting}[caption={Selection-Sort(A)}, escapeinside={(*}{*)}]
+ n = A.length 
+ for (*$j = 1$*) to (*$n - 1$*)
+    smallest = j 
+    for (*$i = j + 1$*) to n 
+        if (*$A[i] < A[smallest]$*)
+            smallest = i 
+    exchange A[j] with A[smallest]
+\end{lstlisting} 
     Selection sort finds the smallest element in the array and swaps it with the first element, then the second smallest with the second element, third smallest swaps with third element and so on. 
     \vspace{1em}
         For selection sort the array of size n is iterated from the first index in the array to the one before the last index. It is assumed that the first index is the smallest, then the next elements are compared to the first element and if it is smaller then that index becomes the smallest, and this continues until every element after is tested. Then the element at index j is swapped with the smallest element.  
