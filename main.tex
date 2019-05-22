@@ -303,9 +303,9 @@ False: The statement is in correct. O notation refers to worst case running time
             smallest = i 
     exchange A[j] with A[smallest]
 \end{lstlisting} 
-    Selection sort finds the smallest element in the array and swaps it with the first element, then the second smallest with the second element, third smallest swaps with third element and so on. 
-    \vspace{1em}
-        For selection sort the array of size n is iterated from the first index in the array to the one before the last index. It is assumed that the first index is the smallest, then the next elements are compared to the first element and if it is smaller then that index becomes the smallest, and this continues until every element after is tested. Then the element at index j is swapped with the smallest element.  
+\begin{definition}
+\textbf{ Selection sort} finds the smallest element in the array and swaps it with the first element, then the second smallest with the second element, third smallest swaps with third element and so on. 
+\end{definition}
 \begin{example}
 State the loop invariant and prove that the algorithm is correct. What is the running time?
 \end{example}
@@ -317,33 +317,32 @@ State the loop invariant and prove that the algorithm is correct. What is the ru
             \item \textbf{Maintenance} It remains true as j increases and i is the element after j. The outer loop from j = 1 to n -1 and i = j + 1 to n, the inner loop finds smallest element from j + 1 and the outer loop exchanges the jth element with the smallest element. The sub-array A[1..j] is sorted. 
             \item \textbf{Termination} The sub-array A[1..n] is sorted, the outer loop iterates from j = 1 to n -1 
         \end{itemize}
-        \item The worst case running time is $O(n^2)$ and best case is $\Omega(n^2)$. The average case is $\Theta(n^2)$ 
+        \item The worst case running time is $O(n^2)$.
 \end{enumerate}
 \subsection{Merge}
 \begin{example}
-Consider the pseudo-code of Merge(A, p, q, r) in the textbook.  Given that A[p...q] and A[q+ 1...r] are both sorted, the function call merges the two sorted sub arraysinto a sorted subarray A[p...r].  Prove the correctness of Merge.  For simplicity,  you can assume that $L[1...n_1]$ = $A[p...q]$ and $R[1...n_2]$ = $A[q+1...r]$., and $L[n_1+1]$ = $R[n_2+1] = \infty$. (So you only need to consider from lines 10).  You can assume that all elements stored in the array have distinct values. 
+Consider the pseudo-code of Merge(A, p, q, r). Given that A[$p\dots q$] and A[$q+ 1\dots r$] are both sorted, the function call merges the two sorted sub arrays into a sorted subarray A[$p\dots r$].  Prove the correctness of Merge.  For simplicity,  you can assume that $L[1...n_1]$ = $A[p\dots q]$ and $R[1...n_2]$ = $A[q+1...r]$., and $L[n_1+1]$ = $R[n_2+1] = \infty$. (So you only need to consider from lines 10).  You can assume that all elements stored in the array have distinct values. 
 \end{example}
-\textbf{Solution: } 
-MERGE(A,p,q,r)
-    \begin{lstlisting}
-    n_1 = q - p + 1
-    n_2 = r - q
-    let L[1..n_1 + 1] and R[1..n_2 + 1] be new arrays 
-    for i = 1 to n_1 
-        L[i] = A[p + i - 1]
-    for j = 1 to n_2 
-        R[j] = A[q + j]
-    L[n_1 + 1] = \infinity 
-    R[n_2 + 1] = \infinity
-    i = 1 
-    j = 1 
-    for k = p to r 
-        if L[i] <= R[j]
-            A[k] = L[i]
-            i = i + 1
-        else A[k] = R[j]
-            j = j + 1
-    \end{lstlisting} 
+
+\begin{lstlisting}[caption={MERGE(A,p,q,r)}, escapeinside={(*}{*)}]
+(*$n_1 = q - p + 1$*)
+(*$n_2 = r - q$*)
+let (*$L[1\dots n_1 + 1]$*) and (*$R[1\dots n_2 + 1]$*) be new arrays 
+for (*$i = 1$*) to (*$n_1$*)
+    L[i] = A[(*$p + i - 1$*)]
+for (*$j = 1$*) to (*$n_2$*)
+    (*$R[j] = A[q + j]$*)$
+(*$L[n_1 + 1] = \infty$*)
+(*$R[n_2 + 1] = \infty$*)
+(*$i = 1$*)
+(*$j = 1$*)
+for (*$k = p$*) to r 
+    if (*$L[i] \leq R[j]$*)
+        (*$A[k] = L[i]$*)
+        (*$i = i + 1$*)
+    else (*$A[k] = R[j]$*)
+        (*$j = j + 1$*)
+\end{lstlisting} 
     \vspace{1em}
     Loop Invariant: $k \in [p,r]$ elements in index k are sorted, this elements come from Left and Right subarrays, also $i <= n_1 + 1, j \leq n_2 + 1$ where $i \in [p,q], j \in [q+1,r]$ this means there are no more elements to be copied to A[p..r].
     \vspace{1em}
@@ -386,8 +385,8 @@ The following is a pseudocode of Insertion-Sort for instance A[1..8] = $\langle 
 \begin{lstlisting}
 for j = 2 to A.length
     key = A[j]
-    //insert A[j] into the sorted
-        sequence A[1..j-1]
+    //insert A[j] into the sorted 
+        //sequence A[1..j-1]
     i = j - 1
     while i > 0 and A[i] > key
         A[i+1] = A[i]
@@ -478,7 +477,7 @@ f(a,b) =
     \item What is the running time of LIne 5 (of Merge-Sort)?\\
      \textbf{Solution:} A call to merge is $\Theta(n)$
 \end{enumerate}
-\section{Solutions To Exercises}
+%%%\section{Solutions To Exercises}
 %----------------------------------------------------------------------------------------
 %	CHAPTER 2
 %----------------------------------------------------------------------------------------
@@ -752,13 +751,13 @@ $$\frac{50n + 15}{n^2} \leq c$$
 %	PART
 %----------------------------------------------------------------------------------------
 
-\part{Part Three}
+\part{Part 3}
 
 %----------------------------------------------------------------------------------------
 %	PART
 %----------------------------------------------------------------------------------------
 
-\part{Final}
+\part{Part 4}
 \chapterimage{chapter_head_1.pdf} % Chapter heading image
 
 \chapter{Binary Search Trees (BST)}
@@ -1344,7 +1343,6 @@ Find the values of $s.d, a.d, b.d$ and $c.d$ after exactly one iteration, i.e. j
     \item (b,c), (a,b), (s,a).
 \end{enumerate}
 \end{example}
-
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
