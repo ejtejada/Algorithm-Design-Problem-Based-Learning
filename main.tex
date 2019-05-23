@@ -488,7 +488,7 @@ f(a,b) =
 \subsection{Ranking Functions}
 \vspace{1em}
 \begin{example}
-Rank  the  following  functions  by  order  of  growth;  that  is,  find  an  ordering $g_1, g_2, \cdot \cdot \cdot, g_k$ (here k is the number of functions given) such that $g_1 = \mathcal{O}(g_2), g_2$ = $\mathcal{O}(g_3), \cdot \cdot \cdot, g_{k - 1}$ = $\mathcal{O}(g_{k}) $ (For  example,  if  you  are  given  functions, $n^2, n,2n,$  your solution should be either $n,2n, n^2$ or $2n, n, n^2$.) 
+Rank  the  following  functions  by  order  of  growth.Find  an  ordering $g_1, g_2, \dots , g_k$ (Where k is the number of functions given) such that $g_1 = \mathcal{O}(g_2), g_2$ = $\mathcal{O}(g_3), \dots, g_{k - 1}$ = $\mathcal{O}(g_{k}) $  
 \begin{center}
     \begin{tabular}{c|c|c|c|c|c}
         $n^2 + 2^n$  &  $n\log(n)$ & $n^2(\log(n))^2$ & $n(\log(n))^2$ & $n^2$ & $log^{100}(n)$\\
@@ -496,49 +496,29 @@ Rank  the  following  functions  by  order  of  growth;  that  is,  find  an  or
         $n^{10}3^{n}$ & $4^n$ & & & &
     \end{tabular}
 \end{center}
-\textbf{Solution:} \\
-\begin{enumerate}
-    \item \textbf{Asymptotic upper bound}. $\mathcal{O} - notation$
-    $$\mathcal{O}(g(n)) \text{ = } \{f(n) : \text{there exist positive constants c and } n_o \text{ such that } 
-    0 \leq f(n) \leq c(g(n) \text{for all} n \geq n_o\}$$
-    \item We consider the following. (Algorithm Design Manual, Page 40) $$1 \text{ << } \log(n) \text{ << } n \text{ << } n\log(n) \text{ << } n^2 \text{ << } n^3 \text{ << } 2^n \text{ << } n!$$ 
-    \item Find $g_1$ the smallest function. Since $1$ is a constant it is the smallest function. Therefore $$g_1 \text{ = } 1$$
-    \item Find $g_2$. We know that $\log(n)$ is smaller than n, so $\log(\log(n))$ is smaller than $\log(n)$ Therefore 
-    $$g_2 \text{ = } \log(\log(n))$$
-    \item Find $g_3, g_4, g_5$
-    \begin{itemize}
-        \item Candidates are $\log(n)$, $\log^{100}(n)$ and $ \frac{\log(n)}{\log(\log(n))}$
-        \item $\log(n) \text{ < } (\log(n))^{100}$. 
-        \item We find $\frac{\log(n)}{1} \text{ > } \frac{\log(n)}{\log(\log(n))}$. Recall if that the larger the denominator the smaller the value.
-        \item Therefore we know that $\frac{\log(n)}{\log(\log(n))} \text{ < } \log(n) \text{ < }  (\log(n))^{100} $
-        $$g_3 \text{ = } \frac{\log(n)}{\log(\log(n))}, g_{4} \text{ = } \log(n) , g_5 \text{ = } (\log(n))^{100}$$
-    \end{itemize}
-    \item Find $g_6, g_7$
-        \begin{itemize}
-            \item Find all functions that have \textit{n}. There are no values with n. 
-            \item Possible candidates $n\log(n), n(\log(n))^2$. $$n\log(n) \text{ < }  n(\log(n))^2$$
-            $$g_6 \text{ = }  n\log(n) , g_7 \text{ = }  n(\log(n))^2$$
-        \end{itemize}
-    \item Find $g_8, g_9, g_10$
-    \begin{itemize}
-        \item Find functions that contain $n^2$. Potentially $n^2, n^2(\log(n))^2, \frac{n^2}{\log(n)}$
-        \item Since $\frac{n^2}{\log(n)} \text{ < }  n^2$
-        \item And $n^2 \text{ < }  n^2(\log(n))^2 $
-        \item Therefore $g_8$ = $\frac{n^2}{\log(n)}, g_9 \text{ = }  n^2, g_{10} \text{ = }  n^2(\log(n))^2$
-    \end{itemize}
-    \item Find $g_{11}, g_{12}, g_{13}, g_{14}$
-    \begin{itemize}
-        \item Find functions with $n^3$. Only $n^3$ is left. $$g_{11} \text{ = }  n^3$$
-        \item Find functions with $2^n$. Functions $n^2 + 2^n, 2^n$. Therefore 
-        $$g_{12} \text{ = } 2^n, g_{13} \text{ = } n^2 + 2^n$$
-        \item Finally $g_{14} \text{ = } n^{10}3^n$
-    \end{itemize}
-    \color{blue}
-    Solution: $$1, \log(\log(n)), \frac{\log(n)}{\log(\log(n))}, \log(n), (\log(n))^{100}, n\log(n), n(\log(n))^2, \frac{n^2}{\log(n)}, n^2, n^2(\log(n))^2, n^3, 2^n, n^2 + 2^n$$ 
-    \large
-    \color{black} 
-\end{enumerate}
 \end{example}
+\begin{definition}
+\textbf{Asymptotic upper bound}. $\mathcal{O} - notation$
+    $$\mathcal{O}(g(n)) \text{ = } \{f(n) : \text{there exist positive constants c and } n_o \text{ such that } 
+    0 \leq f(n) \leq c(g(n) \text{for all } n \geq n_o\}$$
+\end{definition}
+\begin{definition}
+\textbf{Dominance Pecking Order} 
+$$1 < \alpha(n) < \log(\log(n)) < \frac{\log(n)}{\log(\log(n))} < \log(n) < \log^2(n) < \sqrt{n} < n < n\log(n) < n^{1 + \epsilon} < n^2 < 2^n < n!$$ 
+\end{definition}
+\textbf{Solution:} \\
+Follow the \textbf{Dominance Pecking Order} 
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+     $g_1$ & $g_2$ & $g_3$ & $g_4$ & $g_5$ & $g_6$ & $g_7$\\
+     $1$ & $\log(\log(n))$ & $\frac{\log(n)}{\log(\log(n))}$ & $\log(n)$ & $(\log(n))^{100}$ & $n\log(n)$ & $n(\log(n))^2$\\
+     \hline
+    $g_8$ & $g_9$ & $g_{10}$ & $g_{11}$ & $g_{12}$ & $g_{13}$ & $g_{14}$ \\
+    $\frac{n^2}{\log(n)}$ & $n^2$ & $n^2(\log(n))^2$ & $n^3$ & $n^2 + 2^n$ & $n^{10}3^n$ & $4^n$ \\
+    \hline 
+\end{tabular}
+\end{center}
 \subsection{Asymptotically no smaller}
 \begin{example}
  What is $\lim_{n \to \infty} \frac{n^{10}\cdot 3^n}{4^n}$?  Which one is asymptotically no smaller between the two functions?
@@ -738,7 +718,7 @@ $$\frac{50n + 15}{n^2} \leq c$$
 %	PART
 %----------------------------------------------------------------------------------------
 
-\part{Part 2}
+\part{Part Two}
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER 3
@@ -751,13 +731,13 @@ $$\frac{50n + 15}{n^2} \leq c$$
 %	PART
 %----------------------------------------------------------------------------------------
 
-\part{Part 3}
+\part{Part Three}
 
 %----------------------------------------------------------------------------------------
 %	PART
 %----------------------------------------------------------------------------------------
 
-\part{Part 4}
+\part{Part Four}
 \chapterimage{chapter_head_1.pdf} % Chapter heading image
 
 \chapter{Binary Search Trees (BST)}
