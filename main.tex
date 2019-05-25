@@ -209,6 +209,9 @@ $$\text{Unsorted}$$
 \begin{definition}
 \textbf{Time Complexity} is the computational complexity that describes the amount of time it takes to run an algorithm. Time complexity is commonly estimated by counting the number of elementary operations performed by the algorithm, supposing that each elementary operation takes a fixed amount of time to perform.
 \end{definition}
+\begin{definition}
+Best, worst, and expected cases describe the big O (or big theta) time for particular inputs or scenarios.
+\end{definition}
 \begin{center}
 Big-O Time Complexity Graph
 \end{center}
@@ -449,7 +452,7 @@ amount of time each (if numbers are big, this may not be true,
 but we assume that this is the case unless stated otherwise).
 \subsection{Merge Sort} 
 \begin{example}
-Let T(n) denote the running time of Merge-sort on input size n. In the following you can omit floor or ceeling. 
+Let T(n) denote the running time of Merge-sort on input size n. In the following you can omit floor or ceiling. 
 MERGE-SORT(A,p,r)
 \begin{lstlisting}
 if p < r 
@@ -459,7 +462,7 @@ if p < r
     MERGE(A,p,q,r)
 \end{lstlisting}
 \end{example}
-\begin{remark}
+\begin{remark} 
 \textbf{Running time of Merge Sort} 
 \[
 f(a,b) = 
@@ -523,11 +526,18 @@ Follow the \textbf{Dominance Pecking Order}
 \begin{example}
  What is $\lim_{n \to \infty} \frac{n^{10}\cdot 3^n}{4^n}$?  Which one is asymptotically no smaller between the two functions?
 \end{example}
+\begin{definition}\textbf{Limit Method Process} A limit quotient between \textit{f} and \textit{g}
+\[
+\lim_{n \to \infty} \frac{f(n)}{g(n)} =
+\begin{cases} 
+      0 & \text{ then } f(n) \in \mathcal{O}(g(n)) \\
+      c > 0 & \text{ then } f(n) \in \Theta(g(n))\\
+      0 & \text{ then } f(n) \in \Omega(g(n)) 
+ \end{cases}
+ \]
+\end{definition}
 \textbf{Solution:}
 \begin{enumerate}
-    \item Consider the following \\
-    $$\lim_{n \to \infty} \frac{f(n)}{g(n)} \text{ = } 0, \text{implies} f(n) \text{ = } O(g(n))$$
-    \item $$\lim_{n \to \infty} \frac{n^{10}3^n}{4^n} \text{ = } 0 $$
     \item Since $4^n\text{ > } n^{10}3^n$
     \item $g \text{ = } \Omega(n^{10}3^n)$
     \item $f \text{ = } O(4^n)$
@@ -537,13 +547,12 @@ The limit is $0$, and the function that is asymptotically no smaller between the
 \begin{example}
 Formally prove that $n^2+ 100 \text{ = }\mathcal{O}(n^2)$ using the definition of $\mathcal{O}(\cdot)$
 \end{example}
-\textbf{Solution:}
-\begin{enumerate}
-    \item Consider the following. \\
-    \begin{definition}
+\begin{definition} \textbf{Asymptotic upper bound.} $\mathcal{O}$ - notation\\
      $\mathcal{O}(g(n))$ = $\{f(n)$ : there exist positive constants c and  $n_o$ such that\\ $
     0 \leq f(n) \leq c(g(n) \text{for all} n \geq n_o\}$
     \end{definition}
+\textbf{Solution:}
+\begin{enumerate}
     \item We want to show that $0 \leq n^2 + 100 \leq c\cdot n^2$
     $$n^2 + 100 \leq c\cdot n^2$$
     $$100 \leq n^2(c - 1) $$
@@ -711,6 +720,35 @@ $\mathcal{O}(g(n))$ = $\{f(n)$ : there exist positive constants c and  $n_o$ suc
 \end{definition}
 \textbf{Solution:} $$0 \leq 50n + 15 \leq c\cdot n^2$$
 $$\frac{50n + 15}{n^2} \leq c$$
+%----------------------------------------------------------------------------------------
+%	CHAPTER 3
+%----------------------------------------------------------------------------------------
+\chapter{Divide and Conquer}
+\section{Basic}
+\vspace{1em}
+\subsection{Merge-Sort Pseudocode} 
+\begin{example}
+What is wrong with Merge-Sort when $p < r$ condition is removed. 
+\begin{lstlisting}[caption={MERGE-SORT(A,p,r)}, escapeinside={(*}{*)}]
+//if p < r \*Removed*\
+    q = (*$\floor[\Big]{(p + r)/2}$*)
+    Merge-Sort(A,p,q)
+    Merge-Sort(A,q+1,r)
+    Merge(A,p,q,r)
+\end{lstlisting}
+\end{example}
+\begin{definition}
+\textbf{Segmentation faults:}  Caused by a program trying to read or write an illegal memory location.
+\end{definition}
+\textbf{Solution}\\
+\begin{enumerate}
+    \item Suppose there is an array with only one element, that is \textbf{A}[] = <2>, then p = 1, q = 1, therefore the array \textbf{A} is already sorted and there is no need to call MERGE-SORT or MERGE functions. 
+    \item  If \textit{line 1} is missing then q = 0 and MERGE-SORT(A,p = 1, q = 0) which does not make sense since element at at index 0 does not exist (Assuming we start at index 1). 
+    \item This is a logic error, as the program reads outside of the array there will be a segmentation fault.  
+\end{enumerate}
+\section{Intermediate}
+\section{Advanced}
+\section{Exam Problems}
 %------------------------------------------------
 
 
@@ -720,18 +758,48 @@ $$\frac{50n + 15}{n^2} \leq c$$
 
 \part{Part Two}
 
-%----------------------------------------------------------------------------------------
-%	CHAPTER 3
-%----------------------------------------------------------------------------------------
-
 \chapterimage{chapter_head_1.pdf} % Chapter heading image
 
-
+\chapter{Heapsort}
+\section{Basic}
+\section{Intermediate}
+\section{Advanced}
+\section{Exam Problems}
+\chapter{Quicksort}
+\section{Basic}
+\section{Intermediate}
+\section{Advanced}
+\section{Exam Problems}
+\chapter{Sorting In Linear Time} 
+section{Basic}
+\section{Intermediate}
+\section{Advanced}
+\section{Exam Problems}
+\chapter{Medians and Order Statistics}
+\section{Basic}
+\section{Intermediate}
+\section{Advanced}
+\section{Exam Problems}
+\chapter{Hash Tables}
+\section{Basic}
+\section{Intermediate}
+\section{Advanced}
+\section{Exam Problems}
 %----------------------------------------------------------------------------------------
 %	PART
 %----------------------------------------------------------------------------------------
 
 \part{Part Three}
+\chapter{Dynamic Programming}
+section{Basic}
+\section{Intermediate}
+\section{Advanced}
+\section{Exam Problems}
+\chapter{Greedy Algorithms}
+section{Basic}
+\section{Intermediate}
+\section{Advanced}
+\section{Exam Problems}
 
 %----------------------------------------------------------------------------------------
 %	PART
