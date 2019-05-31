@@ -610,7 +610,42 @@ Formally prove that $n^2= \Omega(n^2+ 100)$ Using the definition of $\Omega(\cdo
 \begin{definition}\textbf{Asymptotic lower bound.} $\Omega $ -  notation\\
     $\Omega(g(n) \text{ = } \{f(n) : $ there exist positive constants c and $n_0$  such that\\ $0 \leq cg(n) \leq f(n)$ for all $n \geq n_0$
 \end{definition}
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = left,
+    xlabel = $n_0 \rightarrow n$,
+    ylabel = {Operations},
+    title = \textbf{Asymptotic Lower Bound} ,
+]
 
+\addplot [
+    domain=1:20, 
+    samples=200, 
+    color=red,
+]
+{x^2};
+\addlegendentry{f(n) : $n^2$}
+\addplot [
+    domain=1:20, 
+    samples=200, 
+    color=blue,
+]
+{(1/2)*(x^2 + 100)};
+\addplot [
+    domain=1:20, 
+    samples=200, 
+    color=blue,
+]
+{(1/5)*(x^2 + 100)};
+\addplot [
+    domain=1:20, 
+    samples=200, 
+    color=blue,
+]
+{(1/10)*(x^2 + 100)};
+\addlegendentry{f(n) : $c\cdot(n^2 + 100)$}
+\end{axis}
+\end{tikzpicture}
 \textbf{Solution: } 
 
 \begin{example}
@@ -804,6 +839,36 @@ section{Basic}
 \section{Exam Problems}
 \chapter{Hash Tables}
 \section{Basic}
+\vspace{1em}
+\subsection{Properties of Hash Tables}
+\begin{example}
+What is the main advantage of hash tables over direct-address tables?
+\end{example}
+\begin{definition}
+\textbf{Direct-Address Tables:}
+Uses an array and assumes that keys are integers in the universe set $U = {0,1,\dots,m-1}$, 
+\textit{m} is small, and no two elements have the same key. Operations such as \textit{Search, Insert}, and \textit{Delete} run in $\mathcal{O}(1)$. 
+\begin{enumerate}
+    \item Stores element with key \textit{k} in slot k. 
+    \item Number of possible keys should be small. 
+    \item Denoted as $T[0\dots m - 1]$
+    \item Each slot corresponds to a key in universe $U$.
+\end{enumerate}
+\end{definition}
+\begin{definition}
+\textbf{Hash Tables}
+\end{definition}
+\textbf{Solution:}\\
+\textbf{Disadvantages of Direct Addressing}
+\begin{enumerate}
+    \item If the universe $U = {0,1,\dots,m-1}$ is large, storing a table \textit{T} of size $|U|$ is very impractical. 
+    \item Most space allocated for \textit{T} would be wasted because the set \textit{K} of keys actually stored may be small relative to \textit{U}.
+\end{enumerate}
+\textbf{Advantages of Hash Tables}
+\begin{enumerate}
+    \item Requires much less storage when the set \textit{K} of keys is much smaller than the universe $U$.
+    \item Hash function reduces the range o array indices and hence the size of the array. 
+\end{enumerate}
 \section{Intermediate}
 \section{Advanced}
 \section{Exam Problems}
